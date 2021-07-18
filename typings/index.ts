@@ -11,19 +11,6 @@ export type MeetingEvent = MeetingEventDetails & {
   id: string
 }
 
-// export interface MeetingEventDetails {
-//   title: string
-//   description: string
-//   location: string
-//   date: string
-//   image: string
-//   isFeatured: boolean
-// }
-
-// export interface MeetingEvent extends MeetingEventDetails {
-//   id: string
-// }
-
 export type DateFilter = {
   year: number
   month: number

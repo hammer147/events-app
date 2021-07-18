@@ -1,4 +1,4 @@
-import { createContext, MouseEventHandler, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 type Notification = {
   title: string
@@ -8,8 +8,8 @@ type Notification = {
 
 type NotificationContext = {
   notification: Notification | null
-  showNotification: (notificationData: Notification) => void
-  hideNotification: MouseEventHandler<HTMLDivElement>
+  showNotification: (notification: Notification) => void
+  hideNotification: () => void
 }
 
 export const NotificationContext = createContext<NotificationContext>({
@@ -17,7 +17,6 @@ export const NotificationContext = createContext<NotificationContext>({
   showNotification: () => { },
   hideNotification: () => { }
 })
-
 
 type Props = {
   children: ReactNode
@@ -34,17 +33,13 @@ export const NotificationContextProvider = ({ children }: Props) => {
     }
   }, [activeNotification])
 
-  const showNotificationHandler = (notificationData: Notification) => {
-    setActiveNotification(notificationData)
-  }
-  const hideNotificationHandler = () => {
-    setActiveNotification(null)
-  }
-
+  const showNotification = (notification: Notification) => setActiveNotification(notification)
+  const hideNotification = () => setActiveNotification(null)
+  
   const context: NotificationContext = {
     notification: activeNotification,
-    showNotification: showNotificationHandler,
-    hideNotification: hideNotificationHandler
+    showNotification,
+    hideNotification
   }
 
   return (
