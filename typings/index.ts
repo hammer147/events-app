@@ -1,16 +1,13 @@
 import { ObjectId } from 'mongodb'
 
-export type MeetingEventDetails = {
+export type MeetingEvent = {
   title: string
   description: string
   location: string
   date: string
   image: string
   isFeatured: boolean
-}
-
-export type MeetingEvent = MeetingEventDetails & {
-  id: string
+  id?: string
 }
 
 export type DateFilter = {

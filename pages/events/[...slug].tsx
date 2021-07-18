@@ -3,7 +3,7 @@ import EventList from '../../components/events/event-list'
 import ResultsTitle from '../../components/events/results-title'
 import ErrorAlert from '../../components/ui/error-alert'
 import { GetServerSideProps } from 'next'
-import { DateFilter, MeetingEvent, MeetingEventDetails } from '../../typings'
+import { DateFilter, MeetingEvent } from '../../typings'
 import { getFilteredEvents } from '../../helpers/api-util'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -45,7 +45,7 @@ import { useEffect, useState } from 'react'
 //     }
 //   }, [dateFilter])
 
-//   const { data, error } = useSWR<Record<string, MeetingEventDetails>, Error>(url)
+//   const { data, error } = useSWR<Record<string, MeetingEvent>, Error>(url)
 
 //   useEffect(() => {
 //     if (data) {
