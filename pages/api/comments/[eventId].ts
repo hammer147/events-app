@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { InsertOneWriteOpResult, MongoClient } from 'mongodb'
+import { InsertOneResult, MongoClient } from 'mongodb'
 import { EventComment } from '../../../typings'
 import { connectDatabase, insertDocument, getAllDocuments } from '../../../helpers/db-util'
 
@@ -41,7 +41,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       eventId: eventId as string
     }
 
-    let result: InsertOneWriteOpResult<any>
+    let result: InsertOneResult<Document>
 
     try {
       result = await insertDocument(client, 'comments', newComment)

@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 export type MeetingEventDetails = {
   title: string
   description: string
@@ -17,7 +19,7 @@ export type DateFilter = {
 }
 
 export type EventComment= {
-  _id?: string
+  _id?: ObjectId
   email: string
   name: string
   text: string
