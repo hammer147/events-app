@@ -14,11 +14,11 @@ export const insertDocument = async (client: MongoClient, collection: string, do
   return result
 }
 
-export async function getAllDocuments(client: MongoClient, collection: string, sort: Sort) {
+export async function getAllDocuments(client: MongoClient, collection: string, sort: Sort, filter = {}) {
   const db = client.db()
   const documents = await db
     .collection(collection)
-    .find()
+    .find(filter)
     .sort(sort)
     .toArray()
   return documents

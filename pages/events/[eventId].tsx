@@ -27,7 +27,7 @@ const EventDetailPage = ({ event }: Props) => {
         imageAlt={event.title}
       />
       <EventContent><p>{event.description}</p></EventContent>
-      <Comments eventId={event.id}/>
+      <Comments eventId={event.id!}/>
     </>
   )
 }

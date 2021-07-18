@@ -4,7 +4,7 @@ import { EventComment } from '../../../typings'
 import { connectDatabase, insertDocument, getAllDocuments } from '../../../helpers/db-util'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { eventId } = req.query
+  const { eventId } = <{ eventId: string }>req.query
 
   // CONNECTION
   let client: MongoClient
@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       email,
       name,
       text,
-      eventId: eventId as string
+      eventId
     }
 
     let result: InsertOneResult<Document>
@@ -55,7 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // GET ALL COMMENTS
   if (req.method === 'GET') {
     try {
-      const documents = await getAllDocuments(client, 'comments', { _id: -1 })
+      const documents = await getAllDocuments(client, 'comments', { _id: -1 }, { eventId })
       res.status(200).json({ comments: documents })
     } catch (error) {
       res.status(500).json({ message: 'Getting comments failed.' })
@@ -66,8 +66,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 /**
- * If the API route will be hit frequently, 
+ * If the API route will be hit frequently,
  * you might want to take advantage of MongoDB's "connection pooling".
- * For this, simply remove all client.close() calls from your code. 
+ * For this, simply remove all client.close() calls from your code.
  * The connection will then NOT be closed and will be re-used across requests.
  */
